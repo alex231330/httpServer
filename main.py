@@ -60,6 +60,7 @@ class Server:
         print("Got connection from:", addr)
 
         data = conn.recv(1024)
+        minerStats = None
         if data != None:
             string = bytes.decode(data) 
 
@@ -69,10 +70,13 @@ class Server:
             print ("Request body: ", string)
 
             if (request_method == 'GET') | (request_method == 'HEAD'):
-
+                
                 print (request_method)
                 current_date = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
-                req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 88\n Content-Type: text/html \n Connection: close\n\n <html><body><h1>Hello, World!</h1></body></html>'
+                if not(minerStats == None):
+                    req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 88\n Content-Type: text/html \n Connection: close\n\n' + str(minerStats)
+                else:
+                    req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 88\n Content-Type: text/html \n Connection: close\n\n <html><body><h1>Hello, World!</h1></body></html>'                   
                 print(req + '\n')
                 print(str(req.encode()))
                 try:
@@ -86,8 +90,7 @@ class Server:
 
                 print (request_method)
                 print(data)
-                current_date = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
-                req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 88\n Content-Type: text/html \n Connection: close\n\n <html><body><h1>Hello, World!</h1></body></html>'
+                minerStats = data
                 conn.close()
             else:
                  print("Unknown HTTP request method:", request_method)
