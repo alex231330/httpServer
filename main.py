@@ -77,11 +77,13 @@ class Server:
                 try:
                     conn.send(req.encode())
                 except SocketError as e:
-                        if e.errno == errno.ECONNRESET:
-                            conn.close()
-                            print ('Connection reset by peer')            
+                        if e.errno != errno.ECONNRESET:
+                            raise Exception('Error').with_traceback(e.__traceback__)
                 print ("Closing connection with client")
                 conn.close()
+            if request_method == 'POST':
+                print (request_method)
+                
             else:
                  print("Unknown HTTP request method:", request_method)
 
