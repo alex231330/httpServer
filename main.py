@@ -5,7 +5,6 @@ import time
 import ssl   
 
 class Server:
- """ Class describing a simple HTTP server objects."""
 
  def __init__(self, port = 80):
      """ Constructor """
@@ -24,13 +23,12 @@ class Server:
 
      except Exception as e:
          print ("Warning: Could not aquite port:",self.port,"\n")
-         print ("I will try a higher port")
         
          user_port = self.port
          self.port = 8080
 
          try:
-             print("Launching HTTP server on ", self.host, ":",self.port)
+             print("Launching HTTP server on ", str(self.host), ":",self.port)
              self.socket.bind((self.host, self.port))
 
          except Exception as e:
@@ -40,12 +38,10 @@ class Server:
              import sys
              sys.exit(1)
 
-     print ("Server successfully acquired the socket with port:", self.port)
-     print ("Press Ctrl+C to shut down the server and exit.")
+     print ("Port acquired:", self.port)
      self._wait_for_connections()
 
  def shutdown(self):
-     """ Shut down the server """
      try:
          print("Shutting down the server")
          s.socket.shutdown(socket.SHUT_RDWR)
@@ -70,7 +66,6 @@ class Server:
      return h
 
  def _wait_for_connections(self):
-     """ Main loop awaiting connections """
      while True:
          print ("Awaiting New connection")
          self.socket.listen(3)
@@ -89,7 +84,7 @@ class Server:
          if (request_method == 'GET') | (request_method == 'HEAD'):
 
              print (request_method)
-             conn.send(b'server_response')
+             conn.send(_gen_headers(self, 200))
              print ("Closing connection with client")
              conn.close()
 
