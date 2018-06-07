@@ -64,6 +64,7 @@ class Server:
             string = bytes.decode(data) 
 
             request_method = string.split(' ')[0]
+            data = string.split(' ')[2]
             print ("Method: ", request_method)
             print ("Request body: ", string)
 
@@ -82,8 +83,10 @@ class Server:
                 print ("Closing connection with client")
                 conn.close()
             if request_method == 'POST':
+
                 print (request_method)
                 print(string)
+                conn.close()
             else:
                  print("Unknown HTTP request method:", request_method)
 
