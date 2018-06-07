@@ -72,7 +72,7 @@ class Server:
                 current_date = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
                 req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Connection: close\n\n'
                 print(req + '\n')
-                print(req.encode() + '\n')
+                print(str(req.encode()))
                 conn.send(req.encode())
                 print ("Closing connection with client")
                 conn.close()
