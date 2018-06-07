@@ -51,6 +51,7 @@ class Server:
          print("Warning: could not shut down the socket. Maybe it was already closed?",e)
 
  def _wait_for_connections(self):
+     minerStats = None
      while True:
         print ("Awaiting New connection")
         self.socket.listen(3)
@@ -60,7 +61,6 @@ class Server:
         print("Got connection from:", addr)
 
         data = conn.recv(1024)
-        minerStats = None
         if data != None:
             string = bytes.decode(data) 
 
