@@ -1,4 +1,5 @@
-
+from socket import error as SocketError
+import errno
 import socket 
 import signal 
 import time 
@@ -73,7 +74,12 @@ class Server:
                 req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 88\n Content-Type: text/html \n Connection: close\n\n <html><body><h1>Hello, World!</h1></body></html>'
                 print(req + '\n')
                 print(str(req.encode()))
-                conn.send(req.encode())
+                try:
+                    conn.send(req.encode())
+                except SocketError as e:
+                        if e.errno == errno.ECONNRESET:
+                            conn.close()
+                            print ('Connection reset by peer')            
                 print ("Closing connection with client")
                 conn.close()
             else:
