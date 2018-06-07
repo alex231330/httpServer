@@ -83,7 +83,7 @@ class Server:
                 conn.close()
             if request_method == 'POST':
                 print (request_method)
-                
+                print(string)
             else:
                  print("Unknown HTTP request method:", request_method)
 
