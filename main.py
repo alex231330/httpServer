@@ -51,32 +51,31 @@ class Server:
 
  def _wait_for_connections(self):
      while True:
-         print ("Awaiting New connection")
-         self.socket.listen(3)
+        print ("Awaiting New connection")
+        self.socket.listen(3)
 
-         conn, addr = self.socket.accept()
+        conn, addr = self.socket.accept()
 
-         print("Got connection from:", addr)
+        print("Got connection from:", addr)
 
-         data = conn.recv(1024)
-         string = bytes.decode(data) 
+        data = conn.recv(1024)
+        if data != None:
+            string = bytes.decode(data) 
 
-         request_method = string.split(' ')[0]
-         print ("Method: ", request_method)
-         print ("Request body: ", string)
+            request_method = string.split(' ')[0]
+            print ("Method: ", request_method)
+            print ("Request body: ", string)
 
-         if (request_method == 'GET') | (request_method == 'HEAD'):
+            if (request_method == 'GET') | (request_method == 'HEAD'):
 
-             print (request_method)
-             current_date = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
-             req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Connection: close\n\n'
-
-             conn.send(req.encode)
-             print ("Closing connection with client")
-             #conn.close()
-
-         else:
-             print("Unknown HTTP request method:", request_method)
+                print (request_method)
+                current_date = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+                req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Connection: close\n\n'
+                conn.send(req.encode)
+                print ("Closing connection with client")
+                #conn.close()
+            else:
+                 print("Unknown HTTP request method:", request_method)
 
 def graceful_shutdown(sig, dummy):
     """ This function shuts down the server. It's triggered
