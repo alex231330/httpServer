@@ -87,7 +87,7 @@ class Server:
                             raise Exception('Error').with_traceback(e.__traceback__)
                 print ("Closing connection with client")
                 conn.close()
-            if request_method == 'POST':
+            elif request_method == 'POST':
 
                 #print (request_method)
                 #print(data)
