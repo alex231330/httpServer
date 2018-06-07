@@ -1,7 +1,8 @@
 
 import socket 
 import signal 
-import time    
+import time 
+import ssl   
 
 class Server:
  """ Class describing a simple HTTP server objects."""
@@ -14,7 +15,9 @@ class Server:
 
  def activate_server(self):
      """ Attempts to aquire the socket and launch the server """
+     
      self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+     self.socket = ssl.wrap_socket (httpd.socket, keyfile="key.pem", certfile='cert.pem', server_side=True)
      try: 
          print("Launching HTTP server on ", self.host, ":",self.port)
          self.socket.bind((self.host, self.port))
