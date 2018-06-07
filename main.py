@@ -49,22 +49,6 @@ class Server:
      except Exception as e:
          print("Warning: could not shut down the socket. Maybe it was already closed?",e)
 
- def _gen_headers(self,  code):
-     """ Generates HTTP response Headers. Ommits the first line! """
-
-     h = ''
-     if (code == 200):
-        h = 'HTTP/1.1 200 OK\n'
-     elif(code == 404):
-        h = 'HTTP/1.1 404 Not Found\n'
-
-     current_date = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
-     h += 'Date: ' + current_date +'\n'
-     h += 'Server: Simple-Python-HTTP-Server\n'
-     h += 'Connection: close\n\n' 
-
-     return h
-
  def _wait_for_connections(self):
      while True:
          print ("Awaiting New connection")
@@ -84,7 +68,10 @@ class Server:
          if (request_method == 'GET') | (request_method == 'HEAD'):
 
              print (request_method)
-             conn.send(_gen_headers(self, 200))
+             current_date = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+             req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Connection: close\n\n'
+
+             conn.send(bytes(req))
              print ("Closing connection with client")
              conn.close()
 
