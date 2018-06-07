@@ -65,7 +65,7 @@ class Server:
             string = bytes.decode(data) 
 
             request_method = string.split(' ')[0]
-            data = string.split(' ')[2]
+            data = string.split(' ')[4]
             print ("Method: ", request_method)
             print ("Request body: ", string)
 
@@ -88,8 +88,8 @@ class Server:
                 conn.close()
             if request_method == 'POST':
 
-                print (request_method)
-                print(data)
+                #print (request_method)
+                #print(data)
                 minerStats = data
                 print(minerStats)
                 conn.close()
