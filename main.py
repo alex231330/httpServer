@@ -74,6 +74,7 @@ class Server:
                 print (request_method)
                 current_date = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
                 #if not(minerStats == None):
+                print(minerStats)
                 req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 88\n Content-Type: text/html \n Connection: close\n\n' + str(minerStats)
                 #else:
                 #    req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 88\n Content-Type: text/html \n Connection: close\n\n <html><body><h1>Hello, World!</h1></body></html>'                   
