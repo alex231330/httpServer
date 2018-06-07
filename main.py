@@ -70,7 +70,7 @@ class Server:
 
                 print (request_method)
                 current_date = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
-                req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Connection: close\n\n'
+                req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 88\n Content-Type: text/html \n Connection: close\n\n <html><body><h1>Hello, World!</h1></body></html>'
                 print(req + '\n')
                 print(str(req.encode()))
                 conn.send(req.encode())
