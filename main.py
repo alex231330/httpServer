@@ -91,6 +91,7 @@ class Server:
                 print (request_method)
                 print(data)
                 minerStats = data
+                print(minerStats)
                 conn.close()
             else:
                  print("Unknown HTTP request method:", request_method)
