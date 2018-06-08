@@ -65,7 +65,6 @@ class Server:
             string = bytes.decode(data) 
 
             request_method = string.split(' ')[0]
-            data = string.split('\n')[8]
             #for i in range(len(string.split('\n'))):
             #    print(i)
             #    print('\n')
@@ -96,7 +95,7 @@ class Server:
 
                 #print (request_method)
                 #print(data)
-                minerStats = data
+                minerStats = string.split('\n')[8]
                 print("Data", data)
                 
                 conn.close()
