@@ -1,0 +1,30 @@
+import socket
+import json
+import sys
+import requests
+
+def linesplit(socket):
+    buffer = socket.recv(4096)
+    done = False
+    while not done:
+        more = socket.recv(4096)
+        if not more:
+            done = True
+        else:
+            buffer = buffer + more
+        if buffer:
+            return buffer
+
+api_command = sys.argv[1].split('|')
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect(('192.168.1.141', int(4028)))
+s.send(json.dumps({"command":api_command[0]}))
+resp = linesplit(s)
+r = requests.post(url = 'http://159.65.133.152:80', data = resp)
+resp = resp.replace('\x00','')
+data = resp.split(',')
+
+
+for i in range(len(data)):
+    print(data[i])
+s.close()
