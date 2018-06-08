@@ -65,7 +65,7 @@ class Server:
             string = bytes.decode(data) 
 
             request_method = string.split(' ')[0]
-            data = string.split('\n')[3]
+            data = string.split('\n')[2]
             #print ("Method: ", request_method)
             #print ("Request body: ", string)
             #print ("Data: ", data)
