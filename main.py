@@ -65,11 +65,11 @@ class Server:
             string = bytes.decode(data) 
 
             request_method = string.split(' ')[0]
-            data = string.split('\n')[2]
-            for i in range(len(string.split('\n'))):
-                print(i)
-                print('\n')
-                print(string.split('\n')[i])
+            data = string.split('\n')[8]
+            #for i in range(len(string.split('\n'))):
+            #    print(i)
+            #    print('\n')
+            #    print(string.split('\n')[i])
             #print ("Method: ", request_method)
             #print ("Request body: ", string)
             #print ("Data: ", data)
