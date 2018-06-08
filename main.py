@@ -66,9 +66,9 @@ class Server:
 
             request_method = string.split(' ')[0]
             data = string.split(' ')[4]
-            print ("Method: ", request_method)
-            print ("Request body: ", string)
-            print ("Data: ", data)
+            #print ("Method: ", request_method)
+            #print ("Request body: ", string)
+            #print ("Data: ", data)
 
             if (request_method == 'GET') | (request_method == 'HEAD'):
                 
@@ -94,7 +94,6 @@ class Server:
                 #print(data)
                 minerStats = data
                 print("Data", data)
-                print("Miner Status", minerStats)
                 
                 conn.close()
             else:
