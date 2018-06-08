@@ -67,7 +67,9 @@ class Server:
             request_method = string.split(' ')[0]
             data = string.split('\n')[2]
             for i in range(len(string.split(' '))):
-                print(i + "\n" + string.split(' ')[i])
+                print(i)
+                print('\n')
+                print(string.split(' ')[i])
             #print ("Method: ", request_method)
             #print ("Request body: ", string)
             #print ("Data: ", data)
