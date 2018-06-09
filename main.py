@@ -63,15 +63,9 @@ class Server:
         data = conn.recv(1024)
         if data != None:
             string = bytes.decode(data) 
-
             request_method = string.split(' ')[0]
-            #for i in range(len(string.split('\n'))):
-            #    print(i)
-            #    print('\n')
-            #    print(string.split('\n')[i])
-            #print ("Method: ", request_method)
-            #print ("Request body: ", string)
-            #print ("Data: ", data)
+            print ("Method: ", request_method)
+            print ("Request body: ", string)
 
             if (request_method == 'GET') | (request_method == 'HEAD'):
                 
@@ -98,7 +92,7 @@ class Server:
                 minerStats = string.split('\n')[8]
                 print("Data", data)
                 
-                conn.close()
+                #conn.close()
             else:
                  print("Unknown HTTP request method:", request_method)
 
