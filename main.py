@@ -52,6 +52,9 @@ class Server:
 
  def _wait_for_connections(self):
      minerStats = None
+     current_date = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+     req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 3454\n Content-Type: text/html \n Connection: close\n\n' + minerStats
+     cReq = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 3\n Content-Type: text/html \n Connection: close\n\n'
      while True:
         print ("Awaiting New connection")
         self.socket.listen(3)
@@ -70,12 +73,7 @@ class Server:
             if (request_method == 'GET') | (request_method == 'HEAD'):
                 
                 print (request_method)
-                current_date = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
-                #if not(minerStats == None):
                 print(minerStats)
-                req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 3454\n Content-Type: text/html \n Connection: close\n\n' + minerStats
-                #else:
-                #    req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 88\n Content-Type: text/html \n Connection: close\n\n <html><body><h1>Hello, World!</h1></body></html>'                   
                 print(req + '\n')
                 print(str(req.encode()))
                 try:
@@ -91,8 +89,8 @@ class Server:
                 #print(data)
                 minerStats = string.split('\n')[8]
                 print("Data", data)
-                
-                #conn.close()
+                conn.send(cReq.encode())
+                conn.close()
             else:
                  print("Unknown HTTP request method:", request_method)
 
