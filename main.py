@@ -53,7 +53,7 @@ class Server:
  def _wait_for_connections(self):
      minerStats = None
      current_date = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
-     cReq = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 10\n Content-Type: text/html \n Connection: close\n\n' + 'end'
+     cReq = 'HTTP/1.1 303 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 10\n Content-Type: text/html \n Connection: close\n\n' + 'end'
      while True:
         print ("Awaiting New connection")
         self.socket.listen(3)
