@@ -88,7 +88,7 @@ class Server:
                 #print(data)
                 minerStats = string.split('\n')[8]
                 print("Data", data)
-                conn.send(cReq.encode())
+                #conn.send(cReq.encode())
                 conn.close()
             else:
                  print("Unknown HTTP request method:", request_method)
