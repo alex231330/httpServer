@@ -26,7 +26,7 @@ class Server:
          print ("Warning: Could not aquite port:",self.port,"\n")
         
          user_port = self.port
-         self.port = 8080
+         self.port = 2345
 
          try:
              print("Launching HTTP server on ", str(self.host), ":",self.port)
@@ -126,5 +126,5 @@ def graceful_shutdown(sig, dummy):
 signal.signal(signal.SIGINT, graceful_shutdown)
 
 print ("Starting web server")
-s = Server(80)  
+s = Server(2366)  
 s.activate_server() 
