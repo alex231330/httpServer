@@ -50,10 +50,28 @@ class Server:
      except Exception as e:
          print("Warning: could not shut down the socket. Maybe it was already closed?",e)
 
+
+ def _gen_headers(self,  code):
+     """ Generates HTTP response Headers. Ommits the first line! """
+     h = ''
+     if (code == 200):
+        h = 'HTTP/1.1 200 OK\n'
+     elif(code == 404):
+        h = 'HTTP/1.1 404 Not Found\n'
+
+     # write further headers
+     current_date = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
+     h += 'Date: ' + current_date +'\n'
+     h += 'Server: Simple-Python-HTTP-Server\n'
+     h += 'Connection: close\n\n'  # signal that the conection wil be closed after complting the request
+
+     return h
+
+
  def _wait_for_connections(self):
      minerStats = None
      current_date = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
-     cReq = 'HTTP/1.1 303 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 10\n Content-Type: text/html \n Connection: close\r\n\r\n'
+     cReq = 'HTTP/1.1 303 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT \n Content-Length: 10 \n Content-Type: text/html \n Connection: close \n\n'
      while True:
         print ("Awaiting New connection")
         self.socket.listen(3)
@@ -92,7 +110,8 @@ class Server:
                 #print(data)
                 minerStats = string.split('\n')[8]
                 print("Data", data)
-                conn.send(cReq.encode())
+                res = self._gen_headers( 200)
+                conn.send(res.encode())
                 conn.close()
             else:
                  print("Unknown HTTP request method:", request_method)
