@@ -53,7 +53,7 @@ class Server:
  def _wait_for_connections(self):
      minerStats = None
      current_date = time.strftime("%a, %d %b %Y %H:%M:%S", time.localtime())
-     cReq = 'HTTP/1.1 303 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 10\n Content-Type: text/html \n Connection: close\n\n' + 'end'
+     cReq = 'HTTP/1.1 303 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 10\n Content-Type: text/html \n Connection: close\r\n\r\n'
      while True:
         print ("Awaiting New connection")
         self.socket.listen(3)
@@ -70,9 +70,13 @@ class Server:
             print ("Request body: ", string)
 
             if (request_method == 'GET') | (request_method == 'HEAD'):
-                req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 3454\n Content-Type: text/html \n Connection: close\n\n' + minerStats
+                req = None
+                if minerStats != None:
+                    req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 3454\n Content-Type: text/html \n Connection: close\n\n' + minerStats
+                    print(minerStats)
+                else:
+                    req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 3454\n Content-Type: text/html \n Connection: close\n\n' 
                 print (request_method)
-                print(minerStats)
                 print(req + '\n')
                 print(str(req.encode()))
                 try:
