@@ -51,7 +51,7 @@ class Server:
          print("Warning: could not shut down the socket. Maybe it was already closed?",e)
 
 
- def _gen_headers(self,  code):
+ def _gen_headers(self,  code, data):
      """ Generates HTTP response Headers. Ommits the first line! """
      h = ''
      if (code == 200):
@@ -64,7 +64,8 @@ class Server:
      h += 'Date: ' + current_date +'\n'
      h += 'Server: Simple-Python-HTTP-Server\n'
      h += 'Connection: close\n\n'  # signal that the conection wil be closed after complting the request
-
+	 if not(data == None):
+		h += data
      return h
 
 
