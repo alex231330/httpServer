@@ -64,8 +64,8 @@ class Server:
      h += 'Date: ' + current_date +'\n'
      h += 'Server: Simple-Python-HTTP-Server\n'
      h += 'Connection: close\n\n'  # signal that the conection wil be closed after complting the request
-	 if not(data == None):
-		h += data
+     if not(data == None):
+         h += data
      return h
 
 
