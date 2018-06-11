@@ -64,8 +64,7 @@ class Server:
      h += 'Date: ' + current_date +'\n'
      h += 'Server: Simple-Python-HTTP-Server\n'
      h += 'Connection: close\n\n'  # signal that the conection wil be closed after complting the request
-     if not(data == None):
-         h += data
+     h += data
      return h
 
 
@@ -94,7 +93,7 @@ class Server:
                     req = self._gen_headers( 200, minerStats)
                     print(minerStats)
                 else:
-                    req = self._gen_headers( 200, None)
+                    req = self._gen_headers( 200, '')
                     print(request_method)
                     print(req + '\n')
                     print(str(req.encode()))
@@ -111,7 +110,7 @@ class Server:
                 #print(data)
                 minerStats = string.split('\n')[8]
                 print("Data", data)
-                res = self._gen_headers( 200, None)
+                res = self._gen_headers( 200, '')
                 conn.send(res.encode())
                 conn.close()
             else:
