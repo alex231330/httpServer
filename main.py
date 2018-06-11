@@ -91,13 +91,13 @@ class Server:
             if (request_method == 'GET') | (request_method == 'HEAD'):
                 req = None
                 if minerStats != None:
-					req = self._gen_headers( 200, minerStats)
+                    req = self._gen_headers( 200, minerStats)
                     print(minerStats)
                 else:
-					req = self._gen_headers( 200, None)
-				print (request_method)
-                print(req + '\n')
-                print(str(req.encode()))
+                    req = self._gen_headers( 200, None)
+                    print(request_method)
+                    print(req + '\n')
+                    print(str(req.encode()))
                 try:
                     conn.send(req.encode())
                 except SocketError as e:
