@@ -91,11 +91,11 @@ class Server:
             if (request_method == 'GET') | (request_method == 'HEAD'):
                 req = None
                 if minerStats != None:
-                    req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 3454\n Content-Type: text/html \n Connection: close\n\n' + minerStats
+					req = self._gen_headers( 200, minerStats)
                     print(minerStats)
                 else:
-                    req = 'HTTP/1.1 200 OK\n Date: ' + current_date + '\n Server: Simple-Python-HTTP-Server\n Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n Content-Length: 3454\n Content-Type: text/html \n Connection: close\n\n' 
-                print (request_method)
+					req = self._gen_headers( 200, None)
+				print (request_method)
                 print(req + '\n')
                 print(str(req.encode()))
                 try:
@@ -111,7 +111,7 @@ class Server:
                 #print(data)
                 minerStats = string.split('\n')[8]
                 print("Data", data)
-                res = self._gen_headers( 200)
+                res = self._gen_headers( 200, None)
                 conn.send(res.encode())
                 conn.close()
             else:
